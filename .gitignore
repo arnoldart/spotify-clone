@@ -1,0 +1,13 @@
+gitignore
+# node_modules
+node_modules/
+
+# dist directory
+dist/
+
+# vscode directory
+.vscode/
+
+# All files and folders starting with '.' except for '.gitignore'
+.*
+!.gitignore

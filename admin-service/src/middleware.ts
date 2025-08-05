@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 import dotenv from 'dotenv'
+import multer from 'multer'
 
 dotenv.config()
 
@@ -28,13 +29,15 @@ export const isAuth = async (req: AuthenticatedRequest, res:Response, next: Next
             return
         }
 
-        const {data} = await fetch(`${process.env.User_URL}/api/v1/user/me`, {
+        const data = await fetch(`${process.env.User_URL}/api/v1/user/me`, {
             headers: {
                 token,
             }
         })
 
-        req.user = data;
+        const resData = await data.json()
+
+        req.user = resData;
 
         next()
     } catch (error) {
@@ -43,3 +46,9 @@ export const isAuth = async (req: AuthenticatedRequest, res:Response, next: Next
         })
     }
 }
+
+const storage = multer.memoryStorage()
+const uploadFile = multer({storage}).single("file")
+
+
+export default uploadFile

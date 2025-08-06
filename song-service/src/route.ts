@@ -1,5 +1,5 @@
 import express from "express"
-import { getAllAlbums, getAllSongs, getAllSongsByAlbum, getSingleSong } from "./controller";
+import { getAllAlbums, getAllSongs, getAllSongsByAlbum, getSingleSong } from "./controller.js";
 const router = express.Router()
 
 router.get("/album/all", getAllAlbums);

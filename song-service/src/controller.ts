@@ -1,5 +1,5 @@
-import { sql } from "./config/db";
-import TryCatch from "./TryCatch";
+import { sql } from "./config/db.js";
+import TryCatch from "./TryCatch.js";
 
 export const getAllAlbums = TryCatch(async (req, res) => {
     let albums;

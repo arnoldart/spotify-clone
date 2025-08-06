@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import userRoutes from "./route"
+import cors from 'cors'
 
 dotenv.config()
 
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 })
 
 app.use(express.json())
+app.use(cors())
 app.use("/api/v1", userRoutes)
 
 app.listen(port, () => {

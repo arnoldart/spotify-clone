@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import songRoutes from "./route.js";
 import redis from "redis";
+import cors from "cors";
 
 dotenv.config()
 
@@ -42,6 +43,7 @@ connectRedis();
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 
 const PORT = process.env.PORT 

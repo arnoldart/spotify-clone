@@ -48,6 +48,12 @@ async function initDB() {
     }
 }
 
+app.get("/", (req, res) => {
+    res.json({
+        message: "Welcome to Admin Service"
+    })
+})
+
 app.use("/api/v1/", adminRoutes)
 
 initDB().then(() => {

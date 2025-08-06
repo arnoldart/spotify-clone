@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "concurrently \"tsc -w\" \"nodemon dist/index.js\"",
-    "test": "vitest"
+    "dev": "nodemon --exec tsx src/index.ts",
+    "dev:old": "concurrently \"tsc -w\" \"nodemon dist/index.js\""
   },
   "type": "module",
   "keywords": [],

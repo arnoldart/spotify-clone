@@ -46,51 +46,70 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const PORT = process.env.PORT 
+const PORT = process.env.PORT || 8000
 
 app.use("/api/v1", songRoutes)
 
-const server = app.listen(PORT, () => {
-    console.log(`Song Service running on port ${PORT}`)
-})
-
-// Graceful shutdown
-process.on('SIGTERM', async () => {
-    console.log('SIGTERM received, shutting down gracefully');
-    
-    server.close(() => {
-        console.log('HTTP server closed');
+// Health check endpoint
+app.get("/", (req, res) => {
+    res.json({ 
+        message: "Spotify Song Service is running!",
+        service: "song-service",
+        version: "1.0.0",
+        endpoints: [
+            "GET /api/v1/album/all",
+            "GET /api/v1/song/all", 
+            "GET /api/v1/album/:id",
+            "GET /api/v1/song/:id"
+        ]
     });
-    
-    try {
-        if (redisClient.isOpen) {
-            await redisClient.quit();
-            console.log('Redis connection closed');
-        }
-    } catch (err) {
-        console.error('Error closing Redis connection:', err);
-    }
-    
-    process.exit(0);
 });
 
-process.on('SIGINT', async () => {
-    console.log('SIGINT received, shutting down gracefully');
-    
-    server.close(() => {
-        console.log('HTTP server closed');
-    });
-    
-    try {
-        if (redisClient.isOpen) {
-            await redisClient.quit();
-            console.log('Redis connection closed');
+// For Vercel, we need to export the app as default
+// and also start the server if not in serverless environment
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    const server = app.listen(PORT, () => {
+        console.log(`Song Service running on port ${PORT}`)
+    })
+
+    // Graceful shutdown
+    process.on('SIGTERM', async () => {
+        console.log('SIGTERM received, shutting down gracefully');
+        
+        server.close(() => {
+            console.log('HTTP server closed');
+        });
+        
+        try {
+            if (redisClient.isOpen) {
+                await redisClient.quit();
+                console.log('Redis connection closed');
+            }
+        } catch (err) {
+            console.error('Error closing Redis connection:', err);
         }
-    } catch (err) {
-        console.error('Error closing Redis connection:', err);
-    }
-    
-    process.exit(0);
-});
+        
+        process.exit(0);
+    });
+
+    process.on('SIGINT', async () => {
+        console.log('SIGINT received, shutting down gracefully');
+        
+        server.close(() => {
+            console.log('HTTP server closed');
+        });
+        
+        try {
+            if (redisClient.isOpen) {
+                await redisClient.quit();
+                console.log('Redis connection closed');
+            }
+        } catch (err) {
+            console.error('Error closing Redis connection:', err);
+        }
+        
+        process.exit(0);
+    });
+}
 
 export default app

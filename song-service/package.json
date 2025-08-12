@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "nodemon --exec tsx src/index.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "vercel-build": "echo 'Building for Vercel' && npm run build"
   },
   "type": "module",
   "keywords": [],

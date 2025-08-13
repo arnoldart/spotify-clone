@@ -1,7 +1,7 @@
 import React, { type ReactNode } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-// import Player from "./Player";
+import Player from "./Player";
 
 interface LayoutProps {
   children: ReactNode;
@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {children}
         </div>
       </div>
-      {/* <Player /> */}
+      <Player />
     </div>
   );
 };

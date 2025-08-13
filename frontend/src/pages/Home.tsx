@@ -4,12 +4,9 @@ import Layout from "../components/Layout";
 import Loading from "../components/Loading";
 import SongCard from "../components/SongCard";
 import { useSongData } from "../context/useSongContext";
-// import { useSongData } from "../context/useSongContext";
-// import SongCard from "../components/SongCard";
 
 const Home = () => {
   const { loading, songs, albums } = useSongData();
-  // let loading = true;
   return (
     <div>
       {loading ? (

@@ -214,5 +214,3 @@ Project ini mendemonstrasikan:
 **Architecture**: Microservices  
 **Development Time**: [Sesuai timeline development Anda]  
 **Status**: ✅ Production Ready  
-
-*Dibuat dengan ❤️ menggunakan React, Node.js, dan arsitektur microservices modern.*

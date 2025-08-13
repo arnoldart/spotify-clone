@@ -1,6 +1,7 @@
 import React from "react";
 import { FaBookmark, FaPlay } from "react-icons/fa";
 import { useSongData } from "../context/useSongContext";
+import { useUserData } from "../context/useUserContext";
 // import { useUserData } from "../context/UserContext";
 // import { useSongData } from "../context/SongContext";
 
@@ -12,12 +13,12 @@ interface SongCardProps {
 }
 
 const SongCard: React.FC<SongCardProps> = ({ image, name, desc, id }) => {
-  // const { addToPlaylist, isAuth } = useUserData();
+  const { addToPlaylist, isAuth } = useUserData();
 
   const {setSelectedSong, setIsPlaying} = useSongData()
 
   const saveToPlayListHanlder = () => {
-    // addToPlaylist(id);
+    addToPlaylist(id);
   };
   return (
     <div className="min-w-[180px] p-2 px-3 rounded cursor-pointer hover:bg-[#ffffff26]">
@@ -34,14 +35,14 @@ const SongCard: React.FC<SongCardProps> = ({ image, name, desc, id }) => {
           }}>
             <FaPlay />
           </button>
-          {/* {isAuth && (
+          {isAuth && (
             <button
               className="absolute bottom-2 right-2 bg-green-500 text-black p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               onClick={saveToPlayListHanlder}
             >
               <FaBookmark />
             </button>
-          )} */}
+          )}
         </div>
       </div>
       <p className="font-bold mt-2 mb-1">{name}</p>

@@ -28,6 +28,7 @@ interface UserContextType {
     navigate: (path: string) => void
   ) => Promise<void>;
   logoutUser: () => void;
+  addToPlaylist: (id: string) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined)
@@ -142,6 +143,30 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     toast.success("User Logged Out");
   }
 
+  async function addToPlaylist(id: string) {
+    try {
+      const token = localStorage.getItem("token") || "";
+      const res = await fetch(`${server}/api/v1/song/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token,
+        },
+        body: JSON.stringify({}),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Request failed with status ${res.status}`);
+      }
+
+      const data = await res.json();
+      toast.success(data.message);
+      fetchUser();
+    } catch (error: any) {
+      toast.error(error?.message || "An Error Occured");
+    }
+  }
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -154,7 +179,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       btnLoading,
       loginUser,
       registerUser,
-      logoutUser
+      logoutUser,
+      addToPlaylist
     }}>
       {children}
       <Toaster />

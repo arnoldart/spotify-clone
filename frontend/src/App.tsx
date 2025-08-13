@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { useUserData } from "./context/useUserContext";
 import Loading from "./components/Loading";
+import Register from "./pages/Register";
 
 const App = () => {
   const { isAuth, loading } = useUserData();
@@ -24,10 +25,10 @@ const App = () => {
               element={isAuth ? <Admin /> : <Login />}
             /> */}
             <Route path="/login" element={isAuth ? <Home /> : <Login />} />
-            {/* <Route
+            <Route
               path="/register"
               element={isAuth ? <Home /> : <Register />}
-            /> */}
+            />
           </Routes>
         </BrowserRouter>
       )}

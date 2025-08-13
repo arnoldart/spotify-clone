@@ -21,6 +21,13 @@ interface UserContextType {
     password: string,
     navigate: (path: string) => void
   ) => Promise<void>;
+  registerUser: (
+    name: string,
+    email: string,
+    password: string,
+    navigate: (path: string) => void
+  ) => Promise<void>;
+  logoutUser: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined)
@@ -68,6 +75,41 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   }
 
+  async function registerUser(
+    name: string,
+    email: string,
+    password: string,
+    navigate: (path: string) => void
+  ) {
+    setBtnLoading(true);
+    try {
+      const res = await fetch(`${server}/api/v1/user/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Request failed with status ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      toast.success(data.message);
+      localStorage.setItem("token", data.token);
+      setUser(data.user);
+      setIsAuth(true);
+      setBtnLoading(false);
+      navigate("/");
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "An error occured");
+      setBtnLoading(false);
+    }
+  }
+
+
   async function fetchUser() {
     try {
       const token = localStorage.getItem("token") || "";
@@ -92,6 +134,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   }
 
+  async function logoutUser() {
+    localStorage.clear();
+    setUser(null);
+    setIsAuth(false);
+
+    toast.success("User Logged Out");
+  }
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -102,7 +152,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       loading,
       isAuth,
       btnLoading,
-      loginUser
+      loginUser,
+      registerUser,
+      logoutUser
     }}>
       {children}
       <Toaster />

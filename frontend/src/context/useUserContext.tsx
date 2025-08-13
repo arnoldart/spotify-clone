@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const server = "https://spotify-user-service-zeta.vercel.app"
 
@@ -57,11 +58,12 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
       localStorage.setItem("token", data.token);
       setUser(data.user);
+      toast.success(data.message);
       setIsAuth(true);
       setBtnLoading(false);
       navigate("/");
-    } catch (error) {
-      console.error(error);
+    } catch (error:any) {
+      toast.error(error.response?.data?.message || "An error occured");
       setBtnLoading(false);
     }
   }
@@ -103,6 +105,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       loginUser
     }}>
       {children}
+      <Toaster />
     </UserContext.Provider>
   )
 }

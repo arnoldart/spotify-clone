@@ -1,7 +1,7 @@
 import { FaSearch } from "react-icons/fa";
 import { GrHomeRounded } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
-// import PlayListCard from "./PlayListCard";
+import PlayListCard from "./PlayListCard";
 // import { useUserData } from "../context/UserContext";
 
 const Sidebar = () => {
@@ -35,7 +35,7 @@ const Sidebar = () => {
           </div>
         </div>
         <div onClick={() => navigate("/playlist")}>
-          {/* <PlayListCard /> */}
+          <PlayListCard />
         </div>
 
         <div className="p-4 m-2 bg-[#121212] rounded font-semibold flex flex-col items-start gap-1 pl-4 mt-4">

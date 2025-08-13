@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-const server = "https://spotify-user-service-zeta.vercel.app"
+const server = import.meta.env.VITE_USER_SERVICE_URL
 
 export interface User {
   _id: string;

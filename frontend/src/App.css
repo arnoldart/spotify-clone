@@ -40,3 +40,155 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Custom Spotify-like Range Slider Styles */
+.spotify-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.spotify-slider::-webkit-slider-track {
+  background: #4f4f4f;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.spotify-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fff;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.spotify-slider:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.spotify-slider::-moz-range-track {
+  background: #4f4f4f;
+  height: 4px;
+  border-radius: 2px;
+  border: none;
+}
+
+.spotify-slider::-moz-range-thumb {
+  background: #fff;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.spotify-slider:hover::-moz-range-thumb {
+  opacity: 1;
+}
+
+/* Custom Minimalist Scrollbar Styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  border: none;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Ultra Minimalist - Almost Invisible Scrollbar */
+.scrollbar-minimal {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.scrollbar-minimal::-webkit-scrollbar {
+  width: 3px;
+}
+
+.scrollbar-minimal::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 0;
+}
+
+.scrollbar-minimal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.scrollbar-minimal::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.scrollbar-minimal::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Hide scrollbar completely but keep functionality */
+.scrollbar-invisible {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-invisible::-webkit-scrollbar {
+  display: none;
+}
+
+/* Show scrollbar only on hover - Ultra Clean */
+.scrollbar-hover-minimal {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hover-minimal::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.scrollbar-hover-minimal:hover::-webkit-scrollbar {
+  width: 3px;
+}
+
+.scrollbar-hover-minimal::-webkit-scrollbar-track {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.scrollbar-hover-minimal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.scrollbar-hover-minimal:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.scrollbar-hover-minimal::-webkit-scrollbar-corner {
+  background: transparent;
+}

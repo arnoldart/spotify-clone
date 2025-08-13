@@ -7,7 +7,7 @@ import React, {
   type ReactNode,
 } from "react";
 
-const server = "https://spotify-song-service.vercel.app";
+const server = import.meta.env.VITE_SONG_SERVICE_URL
 
 export interface Song {
   id: string;
